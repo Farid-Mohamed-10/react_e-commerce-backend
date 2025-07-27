@@ -17,7 +17,6 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $allProducts = Product::with('Images')->get();
-        dd($allProducts);
         $products = Product::with('Images')->where('status', '=', 'published')->paginate($request->input('limit', 10));
         $finalResult = $request->input('limit') ? $products : $allProducts;
         return $finalResult;
